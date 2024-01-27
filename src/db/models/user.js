@@ -4,7 +4,7 @@ const { hashPassword, isValidPassword } = require('../../utils/auth-utils');
 class User {
   #passwordHash = null; // a private property
 
-  // Why have a constructor here? We need a way to take the raw data returned from 
+  // Why have a constructor here? We need a way to take the raw data returned from
   // the database and hide the passwordHash before sending it back to the controller
   constructor({ id, username, password_hash }) {
     this.id = id;
@@ -23,7 +23,7 @@ class User {
     const args = [id];
     const { rows } = await knex.raw(query, args);
     const user = rows[0];
-    return user ? new User(user) : null; 
+    return user ? new User(user) : null;
   }
 
   static async findByUsername(username) {

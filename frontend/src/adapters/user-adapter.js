@@ -8,7 +8,7 @@ export const createUser = async ({ username, password }) => (
 
 export const getAllUsers = async () => {
   const [users, error] = await fetchHandler(baseUrl);
-  console.log(error); // just logging errors here for simplicity
+  console.log(error, "there was an issue "); // just logging errors here for simplicity
   return users || [];
 };
 

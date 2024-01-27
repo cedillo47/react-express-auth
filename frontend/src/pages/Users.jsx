@@ -4,7 +4,7 @@ import UserLink from "../components/UserLink";
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
-
+  console.log("hello>")
   useEffect(() => {
     getAllUsers().then(setUsers);
   }, []);
@@ -15,6 +15,7 @@ export default function UsersPage() {
       {
         users.map((user) => <li key={user.id}><UserLink user={user} /></li>)
       }
+      {console.log(users)}
     </ul>
   </>;
 }

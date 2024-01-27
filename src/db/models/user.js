@@ -6,20 +6,22 @@ class User {
 
   // Why have a constructor here? We need a way to take the raw data returned from
   // the database and hide the passwordHash before sending it back to the controller
-  constructor({ id, username, password_hash }) {
-    this.id = id;
+  constructor({ user_id, username, password_hash }) {
+    this.id = user_id;
     this.username = username;
     this.#passwordHash = password_hash;
   }
 
   static async list() {
     const query = 'SELECT * FROM users';
+    console.log("hello? form the back end")
     const { rows } = await knex.raw(query);
     return rows.map((user) => new User(user)); // use the constructor to hide each user's passwordHash
   }
 
   static async find(id) {
-    const query = 'SELECT * FROM users WHERE id = ?';
+    console.log(typeof(id))
+    const query = 'SELECT * FROM users WHERE user_id = ?';
     const args = [id];
     const { rows } = await knex.raw(query, args);
     const user = rows[0];
@@ -51,7 +53,7 @@ class User {
 
   update = async (username) => { // dynamic queries are easier if you add more properties
     const rows = await knex('users')
-      .where({ id: this.id })
+      .where({user_id: this.id })
       .update({ username })
       .returning('*');
 
